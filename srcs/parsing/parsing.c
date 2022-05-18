@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 13:38:02 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/16 19:56:27 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:54:54 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ void read_file(char *path, t_dfile *dfile)
 
 int	parsing(int argc, char *path, t_var *v)
 {
-    v->dfile.error = 0;
     (void)argc;
 	read_file(path, &v->dfile);
     error_file(v);
 	parse_data(v);
-    // parse_map(v);
+    parse_map(v);
     return (1);
 }

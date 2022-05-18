@@ -6,24 +6,11 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:17:19 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/16 19:55:13 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:52:38 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	error_msg(char *s1, char *s2, char *s3, int *ret)
-{
-	write(1, "ERROR\n", 6);
-	if (s1)
-		printf("%s", s1);
-	if (s2)
-		printf("%s", s2);
-	if (s3)
-		printf("%s\n", s3);
-	*ret = 1;
-	return (exit(1), 1);
-}
 
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -36,25 +23,6 @@ void	my_mlx_pixel_put(t_dimg *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}
-
-void	draw_img(t_var *v)
-{
-	int	x;
-	int	y;
-
-	x = 200;
-	y = 50;
-	while (++x < 500)
-		my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_c);
-	while (++y < 300)
-		my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_f);
-	x = 200;
-	y = 50;
-	while (++y < 300)
-		my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_f);
-	while (++x < 500)
-		my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_c);
 }
 
 void    init(t_var *v)
@@ -75,7 +43,7 @@ void    init(t_var *v)
 void	init_struct(t_var *v)
 {
 	v->width = 1024;
-	v->height = 576;
+	v->height = 512;
 }
 
 int main(int argc, char **argv)
@@ -86,7 +54,8 @@ int main(int argc, char **argv)
 	init_struct(&v);
 	parsing(argc, argv[1], &v);
 	init(&v);
-	draw_img(&v);
+	// draw_img(&v);
+	engine(&v);
 	mlx_put_image_to_window(v.mlx, v.mlx_win, v.dimg[0].img, 0, 0);
 	mlx_loop(v.mlx);
 }

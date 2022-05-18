@@ -6,14 +6,16 @@
 #    By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 12:15:16 by mtournay          #+#    #+#              #
-#    Updated: 2022/05/16 19:44:27 by mtournay         ###   ########.fr        #
+#    Updated: 2022/05/18 11:36:23 by mtournay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Cub3D
 
-SRCS		=	./srcs/main.c ./srcs/parsing/parsing.c ./srcs/parsing/data.c \
+PARSING		=	./srcs/main.c ./srcs/parsing/parsing.c ./srcs/parsing/data.c \
 				./srcs/parsing/parsing_map.c ./srcs/parsing/error.c \
+
+ENGINE		=	
 
 DYLIB		= 	./libmlx.dylib
 
@@ -21,7 +23,7 @@ LIBFT		= 	./libft/
 
 NAMELFT		= 	./libft/libft.a
 
-OBJS		=	$(SRCS:c=o)
+OBJS		=	$(PARSING:c=o) $(ENGINE:c=o)
 
 CC			=	gcc
 

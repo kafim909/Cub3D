@@ -6,11 +6,20 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:44:06 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/16 19:56:43 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/17 15:54:38 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../head/cub3d.h"
+
+int	error_msg(char *s)
+{
+	printf(ANSI_COLOR_RED  "ERROR\n" ANSI_COLOR_RESET);
+	if (s)
+		printf("%s\n", s);
+	printf("Missing or invalid data/map\n");
+	return (exit(1), 1);
+}
 
 void	init_error_bools(t_err *err)
 {
@@ -64,22 +73,30 @@ int error_char(char c, t_err *err)
     return (error_char_2(c, err));
 }
 
+int	valid_char_map(char c)
+{
+	if (c != '1' && c != '0' && c != ' ' && c != '\0' && c != 'N' && c != 'S'
+		&& c != 'W' && c != 'E')
+		return (1);
+	return (0);
+}
+
 int	error_line(char *line, t_err *err)
 {
 	int i;
 
 	i = -1;
+	// printf("line = [%s]\n", line);
 	if (error_char(line[i + 1], err))
 		return (1);
-	if (line[i + 1] == ' ')
+	if (line[i + 1] == ' ' || line[i + 1] == '1')
 	{
+		while (line[++i] && line[i] == ' ');
+		if (line[i] != '1')
+			return (1);
 		while (line[++i])
-		{
-			if (line[i] == '1')
-				break ;
-			if (line[i] != ' ')
-				return (1); 
-		}
+			if (valid_char_map(line[i]))
+				return (1);
 	}
 	return (0);
 }
@@ -92,6 +109,13 @@ int	error_file(t_var *v)
     init_error_bools(&v->err_bool);
 	while(v->dfile.file[++i])
 		if(error_line(v->dfile.file[i], &v->err_bool))
-			return (error_msg(NULL, NULL, "Invalid characters in file", &v->dfile.error));
+			error_msg("error file");
+	return (0);
+}
+
+int	missing_data(t_err err)
+{
+	if (err.c || err.e || err.f || err.n || err.s || err.w)
+		error_msg("missing data");
 	return (0);
 }
