@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:23 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 11:31:32 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:28:18 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,39 @@ int	char_pos(char c)
 	return (0);
 }
 
+void	max_sizemap(double *x, double *y, char **map)
+{
+	int	tempx;
+	int	i;
+	int	j;
+
+	tempx = 0;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+			if (tempx < j)
+				tempx = j;
+	}
+	i--;
+	*y = i;
+	*x = j;
+}
+
+void	cub_size(t_var *v, char **map)
+{
+	double	xmax;
+	double	ymax;
+
+	(void)v;
+	max_sizemap(&xmax, &ymax, map);
+	printf("%lf %lf\n", xmax, ymax);
+	v->d_map.cubsizex = v->width / xmax;
+	v->d_map.cubsizey = v->height / ymax;
+	// printf("%lf %lf\n", v->d_map.cubsizex, v->d_map.cubsizey);
+}
+
 int	player_pos(char **map, t_dfile *dfile)
 {
 	int	i;
@@ -145,6 +178,7 @@ int   parse_map(t_var *v)
 		exit(1);
 	if (error_map(v->d_map.map))
 		return (error_msg("error map"));
+	cub_size(v, v->d_map.map);
 	if (player_pos(v->d_map.map, &v->dfile))
 		return (error_msg("player position missing"));
 	return (0);

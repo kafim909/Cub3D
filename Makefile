@@ -6,16 +6,18 @@
 #    By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 12:15:16 by mtournay          #+#    #+#              #
-#    Updated: 2022/05/18 11:36:23 by mtournay         ###   ########.fr        #
+#    Updated: 2022/05/18 16:03:51 by mtournay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Cub3D
 
+UNFOLDERED	=	./srcs/img.c
+
 PARSING		=	./srcs/main.c ./srcs/parsing/parsing.c ./srcs/parsing/data.c \
 				./srcs/parsing/parsing_map.c ./srcs/parsing/error.c \
 
-ENGINE		=	
+ENGINE		=	./srcs/engine/engine.c ./srcs/engine/events.c
 
 DYLIB		= 	./libmlx.dylib
 
@@ -23,14 +25,14 @@ LIBFT		= 	./libft/
 
 NAMELFT		= 	./libft/libft.a
 
-OBJS		=	$(PARSING:c=o) $(ENGINE:c=o)
+OBJS		=	$(PARSING:c=o) $(ENGINE:c=o) $(UNFOLDERED:c=o)
 
 CC			=	gcc
 
-CFLAGS		=	-Wall -Wextra -Werror  -g3 \
-				-fsanitize=address -g
+CFLAGS		=	-Wall -Wextra -Werror \
+				-fsanitize=address -g3
 
-MLX			=	-lmlx -framework OpenGL -framework AppKit -lm -O3 -I.
+MLX			=	-lmlx -framework OpenGL -framework AppKit -lm -o3 -I.
 
 INC			= 	-I./head/
 

@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:17:19 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 12:52:38 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:39:27 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,24 @@ void    init(t_var *v)
 
 	i = -1;
     v->mlx = mlx_init();
-	v->mlx_win = mlx_new_window(v->mlx, v->width, v->height, "Hello world!"); 
-	while (++i < 2)
-	{
-		v->dimg[i].img = mlx_new_image(v->mlx, v->width, v->height);
-		v->dimg[i].addr = mlx_get_data_addr(v->dimg[i].img, &v->dimg[i].bits_per_pixel, 
-							&v->dimg[i].line_length, &v->dimg[i].endian);
-	}
+	v->mlx_win = mlx_new_window(v->mlx, v->width, v->height, "Hello world!");
+	generate_img(v, &v->dimg[0]);
+	generate_img(v, &v->dimg[1]);
 }
 
 void	init_struct(t_var *v)
 {
 	v->width = 1024;
 	v->height = 512;
+}
+
+int	instance(t_var *v)
+{
+	engine(v);
+	img_loop(v);
+	mlx_hook(v->mlx_win, 17, 1L << 5, ft_close, v);
+	mlx_hook(v->mlx_win, 2, 1L << 0, keyhook, v);
+	return (0);
 }
 
 int main(int argc, char **argv)
@@ -55,7 +60,6 @@ int main(int argc, char **argv)
 	parsing(argc, argv[1], &v);
 	init(&v);
 	// draw_img(&v);
-	engine(&v);
-	mlx_put_image_to_window(v.mlx, v.mlx_win, v.dimg[0].img, 0, 0);
+	mlx_loop_hook(v.mlx, instance, &v);
 	mlx_loop(v.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:21:20 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 12:51:31 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/18 18:27:49 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_dfile
 	int		color_f;
     char	**file;
 	int		size_file;
-	int		posx;
-	int		posy;
+	double	posx;
+	double	posy;
 }               t_dfile;
 
 typedef struct s_dmap
@@ -55,12 +55,12 @@ typedef struct s_dmap
 	int		start_x;
     int		start_y;
     char	dir;
+	double	cubsizex;
+	double	cubsizey;
 }				t_dmap;
 
 typedef struct s_dengine
 {
-	double	posx;
-	double	posy;
 	double	dirx;
 	double	diry;
 	double	planex;
@@ -84,8 +84,8 @@ typedef struct s_dimg
 typedef struct s_var
 {
 	int			fd;
-	int			width;
-	int			height;
+	double		width;
+	double		height;
 	void		*mlx;
 	void		*mlx_win;
 	t_dimg		dimg[2];
@@ -93,6 +93,18 @@ typedef struct s_var
 	t_err		err_bool;
 	t_dmap		d_map;
 }               t_var;
+
+void	generate_img(t_var *v, t_dimg *dimg);
+void	img_loop(t_var *v);
+
+void	generate_img(t_var *v, t_dimg *img);
+
+int		keyhook(int keycode, t_var *v);
+int		close_window(int keycode, t_var *v);
+int		ft_close(void);
+
+void	my_mlx_pixel_put(t_dimg *data, int x, int y, int color);
+int		create_trgb(int t, int r, int g, int b);
 
 int		engine(t_var *v);
 
