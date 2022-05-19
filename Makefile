@@ -6,7 +6,7 @@
 #    By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 12:15:16 by mtournay          #+#    #+#              #
-#    Updated: 2022/05/18 16:03:51 by mtournay         ###   ########.fr        #
+#    Updated: 2022/05/19 15:30:13 by mtournay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ UNFOLDERED	=	./srcs/img.c
 PARSING		=	./srcs/main.c ./srcs/parsing/parsing.c ./srcs/parsing/data.c \
 				./srcs/parsing/parsing_map.c ./srcs/parsing/error.c \
 
-ENGINE		=	./srcs/engine/engine.c ./srcs/engine/events.c
+ENGINE		=	./srcs/engine/engine.c ./srcs/engine/events.c \
+				./srcs/engine/event_manager.c
 
 DYLIB		= 	./libmlx.dylib
 

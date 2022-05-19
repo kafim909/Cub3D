@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 14:49:02 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 18:25:32 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:29:29 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,37 @@
 // A = 0
 // D = 2
 
-void	move_player(int keycode, double *x, double *y, char **map)
+int	is_wall(t_dmap dmap, double x, double y)
 {
-	(void)map;
-	if (keycode == 13)
+	x = x / dmap.cubsizex;
+	y = y / dmap.cubsizey;
+	if (dmap.map[(int)y][(int)x] == '1')
+		return (1);
+	return (0);
+}
+
+void	orientation(t_dfile *dfile, t_engine *deng, int keycode)
+{
+	if (keycode == 123)
+		
+	if (keycode == 124)
+	
+}
+
+void	move_player(int keycode, double *x, double *y, t_dmap dmap)
+{
+	if (keycode == 13 && !is_wall(dmap, *x, *y - 3))
 		*y -= 3;
-	if (keycode == 1)
+	if (keycode == 1 && !is_wall(dmap, *x, *y + 3))
 		*y += 3;
-	if (keycode == 0)
+	if (keycode == 0 && !is_wall(dmap, *x - 3, *y))
 		*x -= 3;
-	if (keycode == 2)
+	if (keycode == 2 && !is_wall(dmap, *x + 3, *y))
 		*x += 3;
 }
 
 int	ft_close(void)
 {
 	exit(1);
-	return (0);
-}
-
-int	keyhook(int keycode, t_var *v)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_image(v->mlx, v->dimg[0].img);
-		mlx_destroy_image(v->mlx, v->dimg[1].img);
-		mlx_destroy_window(v->mlx, v->mlx_win);
-		exit(0);
-	}
-	if (keycode == 13 || keycode == 1 || keycode == 0 || 
-		keycode == 2)
-		move_player(keycode, &v->dfile.posx, &v->dfile.posy, v->d_map.map);
 	return (0);
 }

@@ -6,24 +6,22 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 11:36:41 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 18:37:37 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 13:58:52 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../head/cub3d.h"
 
-void	draw_square(t_var *v, int x, int y)
+void	draw_square(t_var *v, int x, int y, int color)
 {
 	int	i;
 	int	j;
 	int temp;
 
 	i = -1;
-	// printf("%lf %lf \n", v->d_map.cubsizex, v->d_map.cubsizey);
-	// x *= v->d_map.cubsizex;
+	x *= v->d_map.cubsizex;
 	y *= v->d_map.cubsizey;
 	temp = x;
-	// printf("%d %d\n", x, y);
 	while (++i < v->d_map.cubsizey)
 	{
 		j = -1;
@@ -32,8 +30,8 @@ void	draw_square(t_var *v, int x, int y)
 		{
 			if (x >= 0 && y >= 0)
 			{
-				my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_f);
-				my_mlx_pixel_put(&v->dimg[1], x, y, v->dfile.color_f);
+				my_mlx_pixel_put(&v->dimg[0], x, y, color);
+				my_mlx_pixel_put(&v->dimg[1], x, y, color);
 			}
 			x++;	
 		}
@@ -55,7 +53,9 @@ void	draw_map(t_var *v, char **map)
 		while (map[i][++j])
 		{
 			if (map[i][j] == '1')
-				draw_square(v, j, i);
+				draw_square(v, j, i, 0x2d1f5d);
+			if (map[i][j] == '0' || cardinals(map[i][j]))
+				draw_square(v, j, i, 0xfcf0f4);
 		}
 	}
 }
@@ -68,11 +68,11 @@ void	draw_player(t_var *v, int x, int y)
 
 	i = -1;
 	temp = x;
-	while (++i < 8)
+	while (++i < 1)
 	{
 		j = -1;
 		x = temp;
-		while (++j < 8)
+		while (++j < 1)
 		{
 			my_mlx_pixel_put(&v->dimg[0], x, y, v->dfile.color_c);
 			my_mlx_pixel_put(&v->dimg[1], x, y, v->dfile.color_c);

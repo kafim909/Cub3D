@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:23 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 18:28:18 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:15:27 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	in_map_char(char c)
 	return (0);
 }
 
-int	char_pos(char c)
+int	cardinals(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W'
 		|| c == 'E')
@@ -98,9 +98,8 @@ void	max_sizemap(double *x, double *y, char **map)
 			if (tempx < j)
 				tempx = j;
 	}
-	i--;
 	*y = i;
-	*x = j;
+	*x = ++tempx;
 }
 
 void	cub_size(t_var *v, char **map)
@@ -110,13 +109,11 @@ void	cub_size(t_var *v, char **map)
 
 	(void)v;
 	max_sizemap(&xmax, &ymax, map);
-	printf("%lf %lf\n", xmax, ymax);
-	v->d_map.cubsizex = v->width / xmax;
-	v->d_map.cubsizey = v->height / ymax;
-	// printf("%lf %lf\n", v->d_map.cubsizex, v->d_map.cubsizey);
+	v->d_map.cubsizex = (double)v->width / (double)xmax;
+	v->d_map.cubsizey = (double)v->height / (double)ymax;
 }
 
-int	player_pos(char **map, t_dfile *dfile)
+int	player_pos(char **map, t_dfile *dfile, t_dmap dmap)
 {
 	int	i;
 	int	j;
@@ -127,10 +124,10 @@ int	player_pos(char **map, t_dfile *dfile)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (char_pos(map[i][j]))
+			if (cardinals(map[i][j]))
 			{
-				dfile->posx = j;
-				dfile->posy = i;
+				dfile->posx = j * dmap.cubsizex;
+				dfile->posy = i * dmap.cubsizey;
 				return (0);
 			}
 		}
@@ -179,7 +176,9 @@ int   parse_map(t_var *v)
 	if (error_map(v->d_map.map))
 		return (error_msg("error map"));
 	cub_size(v, v->d_map.map);
-	if (player_pos(v->d_map.map, &v->dfile))
+	if (player_pos(v->d_map.map, &v->dfile, v->d_map))
 		return (error_msg("player position missing"));
+	v->d_eng.posx = v->dfile.posx;
+	v->d_eng.posy = v->dfile.posy;
 	return (0);
 }

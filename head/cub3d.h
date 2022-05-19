@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:21:20 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 18:27:49 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 15:15:58 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../libft/libft.h"
 
 # define ANSI_COLOR_RED     "\x1b[31m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
+
+# define PI 3.1415926535
 
 typedef struct s_error
 {
@@ -61,6 +64,8 @@ typedef struct s_dmap
 
 typedef struct s_dengine
 {
+	double	posx;
+	double	posy;
 	double	dirx;
 	double	diry;
 	double	planex;
@@ -92,14 +97,20 @@ typedef struct s_var
 	t_dfile		dfile;
 	t_err		err_bool;
 	t_dmap		d_map;
+	t_engine	d_eng;
 }               t_var;
 
 void	generate_img(t_var *v, t_dimg *dimg);
 void	img_loop(t_var *v);
 
+
 void	generate_img(t_var *v, t_dimg *img);
 
 int		keyhook(int keycode, t_var *v);
+
+void	orientation(t_dfile *dfile, t_engine *deng, int keycode);
+
+void	move_player(int keycode, double *x, double *y, t_dmap dmap);
 int		close_window(int keycode, t_var *v);
 int		ft_close(void);
 
@@ -112,6 +123,7 @@ void 	read_file(char *path, t_dfile *dfile);
 int		parsing(int argc, char *path, t_var *v);
 void    parse_data(t_var *v);
 int	    parse_map(t_var *v);
+int		cardinals(char c);
 
 int		create_trgb(int t, int r, int g, int b);
 
