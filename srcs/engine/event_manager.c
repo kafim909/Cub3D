@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:11:47 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 15:16:24 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:22:51 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,5 @@ int	keyhook(int keycode, t_var *v)
 	if (keycode == 13 || keycode == 1 || keycode == 0 || 
 		keycode == 2)
 		move_player(keycode, &v->d_eng.posx, &v->d_eng.posy, v->d_map);
-	if (keycode == 123 || keycode == 124)
-	{
-		orientation(&v->dfile, &v->d_eng, keycode);
-	}
 	return (0);
 }

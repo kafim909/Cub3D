@@ -6,13 +6,13 @@
 #    By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 12:15:16 by mtournay          #+#    #+#              #
-#    Updated: 2022/05/19 15:30:13 by mtournay         ###   ########.fr        #
+#    Updated: 2022/05/19 16:21:48 by mtournay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Cub3D
 
-UNFOLDERED	=	./srcs/img.c
+IMG			=	./srcs/img/img.c ./srcs/img/draw_minimap.c
 
 PARSING		=	./srcs/main.c ./srcs/parsing/parsing.c ./srcs/parsing/data.c \
 				./srcs/parsing/parsing_map.c ./srcs/parsing/error.c \
@@ -26,7 +26,7 @@ LIBFT		= 	./libft/
 
 NAMELFT		= 	./libft/libft.a
 
-OBJS		=	$(PARSING:c=o) $(ENGINE:c=o) $(UNFOLDERED:c=o)
+OBJS		=	$(PARSING:c=o) $(ENGINE:c=o) $(IMG:c=o)
 
 CC			=	gcc
 

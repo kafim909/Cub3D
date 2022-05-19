@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 14:49:02 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 15:29:29 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:35:25 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,18 @@
 
 int	is_wall(t_dmap dmap, double x, double y)
 {
+	double right_x;
+	double right_y;
+
+	right_x = (x + dmap.cubsizex - 5) / (dmap.cubsizex);
+	right_y = (y + dmap.cubsizey - 5) / (dmap.cubsizey);
 	x = x / dmap.cubsizex;
 	y = y / dmap.cubsizey;
-	if (dmap.map[(int)y][(int)x] == '1')
+	if (dmap.map[(int)y][(int)x] == '1' || dmap.map[(int)y][(int)right_x] == '1' 
+		|| dmap.map[(int)right_y][(int)x] == '1' 
+		|| dmap.map[(int)right_y][(int)right_x] == '1')
 		return (1);
 	return (0);
-}
-
-void	orientation(t_dfile *dfile, t_engine *deng, int keycode)
-{
-	if (keycode == 123)
-		
-	if (keycode == 124)
-	
 }
 
 void	move_player(int keycode, double *x, double *y, t_dmap dmap)

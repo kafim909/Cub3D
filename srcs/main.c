@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:17:19 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 18:39:27 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:30:19 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,16 @@ void    init(t_var *v)
 	generate_img(v, &v->dimg[1]);
 }
 
-void	init_struct(t_var *v)
+void	init_struct(t_var *v, t_engine *d_eng)
 {
-	v->width = 1024;
-	v->height = 512;
+	v->width = 1280;
+	v->height = 720;
+	d_eng->dirx = -1;
+	d_eng->diry = 0;
+	d_eng->planex = 0;
+	d_eng->planey = 0.66;
+	d_eng->time = 0;
+	d_eng->oldTime = 0;
 }
 
 int	instance(t_var *v)
@@ -56,7 +62,7 @@ int main(int argc, char **argv)
 	t_var	v;
 
 	(void)argc;
-	init_struct(&v);
+	init_struct(&v, &v.d_eng);
 	parsing(argc, argv[1], &v);
 	init(&v);
 	// draw_img(&v);

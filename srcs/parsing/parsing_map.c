@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:23 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 15:15:27 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 18:37:01 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void	cub_size(t_var *v, char **map)
 
 	(void)v;
 	max_sizemap(&xmax, &ymax, map);
-	v->d_map.cubsizex = (double)v->width / (double)xmax;
-	v->d_map.cubsizey = (double)v->height / (double)ymax;
+	v->d_map.cubsizex = ((double)v->width / (double)xmax) / SIZE_MINIMAP;
+	v->d_map.cubsizey = ((double)v->height / (double)ymax) / SIZE_MINIMAP;
 }
 
 int	player_pos(char **map, t_dfile *dfile, t_dmap dmap)

@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:21:20 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 15:15:58 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/19 19:53:02 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
 # define PI 3.1415926535
+# define SIZE_MINIMAP 4
 
 typedef struct s_error
 {
@@ -75,6 +76,17 @@ typedef struct s_dengine
 	double	camx;
 	double	raydirx;
 	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	int		stepx;
+	int		stepy;
+	int		hit;
+	int		side;
 }				t_engine;
 
 typedef struct s_dimg
@@ -100,15 +112,16 @@ typedef struct s_var
 	t_engine	d_eng;
 }               t_var;
 
+
+
 void	generate_img(t_var *v, t_dimg *dimg);
 void	img_loop(t_var *v);
 
+void	minimap(t_var *v);
 
 void	generate_img(t_var *v, t_dimg *img);
 
 int		keyhook(int keycode, t_var *v);
-
-void	orientation(t_dfile *dfile, t_engine *deng, int keycode);
 
 void	move_player(int keycode, double *x, double *y, t_dmap dmap);
 int		close_window(int keycode, t_var *v);
