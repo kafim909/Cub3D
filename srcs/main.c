@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:17:19 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 18:30:19 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:02:39 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_struct(t_var *v, t_engine *d_eng)
 	d_eng->planex = 0;
 	d_eng->planey = 0.66;
 	d_eng->time = 0;
-	d_eng->oldTime = 0;
+	d_eng->oldtime = 0;
 }
 
 int	instance(t_var *v)

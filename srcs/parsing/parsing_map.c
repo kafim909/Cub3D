@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:20:23 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 18:37:01 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:41:51 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	count_lines_map(char **line)
 	while (line[++i]);
 	return (i);
 }
+
+// int	remove_nl_end()
 
 int	init_map(char **line, t_dmap *dmap)
 {
@@ -61,6 +63,7 @@ int	firstlast_error(char *line1, char *line2)
 		if (line1[i] != '1' && line1[i] != ' ')
 			return (1);
 	i = -1;
+	// printf("line fin = %s\n", line2);
 	while (line2[++i])
 		if (line2[i] != '1' && line2[i] != ' ')
 			return (1);
@@ -144,10 +147,11 @@ int	border_error(char *mid, char *up, char *down)
 		return (0);
 	while (mid[++i])
 	{
+		printf("%c", mid[i]);
 		if (in_map_char(mid[i]))
-			if (mid[i - 1] == ' ' || mid[i + 1] == ' ' ||
-				up[i - 1] == ' ' || up[i] == ' ' || up[i + 1] == ' ' ||
-				down[i - 1] == ' ' || down[i] == ' ' || down[i + 1] == ' ')
+			if (mid[i - 1] == ' ' ||  !mid[i + 1] || !down[0]
+				|| !down[i] || down[i] == ' ' ||
+				 mid[i + 1] == ' ' || !up[i] || up[i] == ' ')
 				return (1);
 	}
 	return (0);
@@ -164,6 +168,7 @@ int	error_map(char **line)
 	{
 		if (border_error(line[i], line[i - 1], line[i + 1]))
 			return (1);
+		printf("\n");
 	}
 	return (0);
 

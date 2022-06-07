@@ -6,11 +6,21 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:33:03 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/18 15:57:56 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/20 10:19:30 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head/cub3d.h"
+
+void	verline(int x, t_var v, int color)
+{
+	while (v.d_eng.drawstart < v.d_eng.drawend)
+	{
+		my_mlx_pixel_put(&v.dimg[0], x, v.d_eng.drawstart, color);
+		my_mlx_pixel_put(&v.dimg[1], x, v.d_eng.drawstart, color);
+		v.d_eng.drawstart++;
+	}
+}
 
 void	generate_img(t_var *v, t_dimg *dimg)
 {

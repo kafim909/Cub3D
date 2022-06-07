@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 19:44:06 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/17 15:54:38 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:00:21 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	error_line(char *line, t_err *err)
 	int i;
 
 	i = -1;
-	// printf("line = [%s]\n", line);
 	if (error_char(line[i + 1], err))
 		return (1);
 	if (line[i + 1] == ' ' || line[i + 1] == '1')

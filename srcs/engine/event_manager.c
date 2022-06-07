@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:11:47 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 16:22:51 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/25 11:08:24 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	keyhook(int keycode, t_var *v)
 {
-	printf("%d\n", keycode);
+	// printf("%d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_image(v->mlx, v->dimg[0].img);

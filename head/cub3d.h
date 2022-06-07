@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 12:21:20 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/19 19:53:02 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/20 10:40:19 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_dengine
 	double	planex;
 	double	planey;
 	double	time;
-	double	oldTime;
+	double	oldtime;
 	double	camx;
 	double	raydirx;
 	double	raydiry;
@@ -87,6 +87,10 @@ typedef struct s_dengine
 	int		stepy;
 	int		hit;
 	int		side;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+
 }				t_engine;
 
 typedef struct s_dimg
@@ -100,6 +104,7 @@ typedef struct s_dimg
 
 typedef struct s_var
 {
+	int			color;
 	int			fd;
 	double		width;
 	double		height;
@@ -112,8 +117,7 @@ typedef struct s_var
 	t_engine	d_eng;
 }               t_var;
 
-
-
+void	verline(int x, t_var v, int color);
 void	generate_img(t_var *v, t_dimg *dimg);
 void	img_loop(t_var *v);
 

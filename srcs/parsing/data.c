@@ -6,7 +6,7 @@
 /*   By: mtournay <mtournay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:51:22 by mtournay          #+#    #+#             */
-/*   Updated: 2022/05/17 12:00:54 by mtournay         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:19:37 by mtournay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ int	color_conversion(int *color, char **buf)
 	return (0);
 }
 
+int	trim_spaces(char **buf)
+{
+	char	*temp;
+	int		i;
+
+	i = -1;
+	while (buf[++i])
+	{
+		temp = buf[i];
+		buf[i] = ft_strtrim(buf[i], " ");
+		if (!buf[i])
+			exit(1);
+		free(temp);
+		if (!buf[i][0])
+			error_msg("color missing");
+	}
+	return (0);
+}
+
 int	error_colors(char **buf)
 {
 	int	i;
@@ -36,6 +55,7 @@ int	error_colors(char **buf)
 	i = -1;
 	while (buf[++i] && i < 3)
 	{
+		trim_spaces(buf);
 		j = -1;
 		while (buf[i][++j] && (ft_isdigit(buf[i][j]) || buf[i][j] == ' '));
 		if (buf[i][j])
